@@ -1,43 +1,17 @@
 ﻿using System;
 using System.IO;
+using CalculatorProgram;
 
-namespace CalculatorTurtorial
+
+namespace CalculatorProgram
 {
-    class Calculator
-    {
-        public static double DoOperation(double num1, double num2, string op)
-        {
-            double result = double.NaN;
 
-            switch (op)
-            {
-                case "a":
-                    result = num1 + num2;
-                    break;
-                case "s":
-                    result = num2 - num1;
-                    break;
-                case "m":
-                    result = num1 * num2;
-                    break;
-                case "d":
-                    if (num2 != 0)
-                    {
-                        result = num1 / num2;
-                    }
-                    break;
-                default:
-                    break;
-            }
-            return result;
-        }
-    }
-
-    class Program
+    public class Program
     {
-        static void Main()
+       public static void Main()
         {
             bool endApp = false;
+            Calculator calculator = new Calculator();
             Console.WriteLine("Console Calculator in C#\r");
             Console.WriteLine("------------------------\r");
 
@@ -82,7 +56,7 @@ namespace CalculatorTurtorial
 
                 try
                 {
-                    result = Calculator.DoOperation(cleanNum1, cleanNum2, op);
+                    result = calculator.DoOperation(cleanNum1, cleanNum2, op);
                     if (double.IsNaN(result))
                     {
                         Console.WriteLine("This operation will result in a mathematical error.\n");
@@ -100,9 +74,10 @@ namespace CalculatorTurtorial
                 Console.Write("Press 'n' and Enter to close the app, or press any other key and Enter to continue:");
                 if (Console.ReadLine() == "n") endApp = true;
 
-                Console.WriteLine("\n");
-                
+                Console.WriteLine("\n");             
             }
+            //Adding a call to close the JSON writer before return
+            calculator.Finish();
             return;
         }
     }
